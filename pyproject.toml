@@ -1,0 +1,130 @@
+[tool.poetry]
+name = "hanya"
+version = "0.1.0"
+description = "A simple and quick ingest system for Komga library"
+authors = ["noaione <noaione0809@gmail.com>"]
+license = "MIT"
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.10"
+watchdog = "^3.0.0"
+discord-webhook = "^1.3.0"
+msgspec = "^0.18.4"
+pyyaml = "^6.0.1"
+nmanga = { git = "https://github.com/noaione/nao-manga-rls.git", rev = "cbb1ce38e39df4343e3fa1be17a1e3bbdd427f14" }
+
+[tool.poetry.group.dev.dependencies]
+ruff = "^0.1.3"
+isort = "^5.12.0"
+black = "^23.10.1"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.poetry.scripts]
+hanya = "hanya.__main__:cli_main"
+
+[tool.ruff]
+ignore = [
+    "E203",
+    "F405",
+    "F403",
+    "F722",
+    "N806",
+    "COM812",
+    "D400",  # first line should be period, most of my docstring will be LICENSE header so no thanks
+    "D202",
+    "D401",
+    "N818",  # error
+    "T201",
+]
+line-length = 120
+extend-exclude = [
+    "env",
+    "venv",
+    ".pytest_cache",
+    ".venv",
+    "__pycache__",
+    ".git",
+    ".mypy_cache",
+    ".vscode",
+    ".ruff_cache",
+    "**/Lib/**",
+    "dist",
+    "build"
+]
+ignore-init-module-imports = true
+target-version = "py310"
+select = [
+    "E",
+    "F",
+    "W",
+    "I",
+    "N",
+    "S",
+    "B",
+    "T",
+    "Q",
+    # "D",
+    "RUF",
+    "COM",
+    "PTH",
+    "ASYNC",
+]
+src = ["hanya"]
+preview = true
+
+[tool.ruff.format]
+preview = true
+quote-style = "single"
+indent-style = "space"
+skip-magic-trailing-comma = true
+
+[tool.ruff.pydocstyle]
+convention = "numpy"
+ignore-decorators = ["typing.overload"]
+
+[tool.ruff.isort]
+combine-as-imports = false
+split-on-trailing-comma = true
+required-imports = ["from __future__ import annotations"]
+known-first-party = ["hanya"]
+section-order = ["future", "standard-library", "third-party", "first-party", "local-folder"]
+
+[tool.ruff.flake8-bugbear]
+extend-immutable-calls = ["fastapi.Depends", "fastapi.Query"]
+
+[tool.ruff.per-file-ignores]
+"__init__.py" = ["F401", "F403", "I002", "D205"]
+
+[tool.ruff.flake8-unused-arguments]
+ignore-variadic-names = true
+
+[tool.black]
+line-length = 120
+target-version = ["py310"]
+include = '\.pyi?$'
+exclude = '''
+/(
+    \.git
+  | \.hg
+  | \.mypy_cache
+  | \.tox
+  | \.venv
+  | venv
+  | env
+  | _build
+  | build
+  | dist
+)/
+'''
+
+[tool.isort]
+profile = "black"
+multi_line_output = 3
+extend_skip = ["env/**", "venv/**", ".pytest_cache/**", ".venv/**", "__pycache__/**"]
+line_length = 110
+skip_gitignore = false
+combine_as_imports = false
