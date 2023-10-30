@@ -54,5 +54,9 @@ class KarmaConfig(Struct):
     """:class:`KarmaConfigMode`: Mode of operation for Hanya."""
     poll_interval: int = field(default=30, name="pollInterval")
     """:class:`int`: Interval in seconds to poll for changes."""
+    logfile: str = field(default="hanya.log")
+    """:class:`str`: Base name of the log file."""
+    logpath: str = field(default="logs")
+    """:class:`str`: Path to store the log file."""
     watchdog: list[KarmaConfigWatchDirectory] = field(default_factory=list)
     """:class:`list[KarmaConfigWatchDirectory]`: List of directories to watch."""
