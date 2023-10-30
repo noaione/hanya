@@ -12,7 +12,8 @@ watchdog = "^3.0.0"
 discord-webhook = "^1.3.0"
 msgspec = "^0.18.4"
 pyyaml = "^6.0.1"
-nmanga = { git = "https://github.com/noaione/nao-manga-rls.git", rev = "cbb1ce38e39df4343e3fa1be17a1e3bbdd427f14" }
+coloredlogs = "^15.0.1"
+nmanga = { git = "https://github.com/noaione/nao-manga-rls.git", tag = "v0.12.0" }
 
 [tool.poetry.group.dev.dependencies]
 ruff = "^0.1.3"
